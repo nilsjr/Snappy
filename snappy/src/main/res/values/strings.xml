@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="snappy_flip_camera">Switch camera</string>
+  <string name="snappy_take_image">Take image</string>
+  <string name="snappy_show_gallery">Show gallery</string>
+</resources>

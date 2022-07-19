@@ -1,0 +1,29 @@
+complexity:
+  ComplexMethod:
+    ignoreSingleWhenExpression: true
+  LongParameterList:
+    ignoreAnnotated: ['Parcelize']
+    constructorThreshold: 8
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+
+formatting:
+  android: true
+  Indentation:
+    active: false
+  FinalNewline:
+    insertFinalNewLine: false
+  ParameterListWrapping:
+    indentSize: 2
+
+performance:
+  SpreadOperator:
+    active: false
+
+style:
+  MagicNumber:
+    active: false
+  NewLineAtEndOfFile:
+    active: false

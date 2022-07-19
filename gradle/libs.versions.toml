@@ -1,0 +1,71 @@
+[versions]
+accompanist = "0.24.13-rc"
+androidGradle = "7.2.1"
+androidconfig-buildTools = "32.0.0"
+androidconfig-compileSdk = "32"
+androidconfig-minSdk = "21"
+androidconfig-targetSdk = "32"
+androidxCore = "1.8.0"
+androidxLifecycle = "2.5.0"
+appcompat = "1.4.2"
+cameraX = "1.1.0"
+coil = "2.1.0"
+composeActivity = "1.5.0"
+composeAnimation = "1.2.0-rc03"
+composeCompiler = "1.2.0"
+composeConstraintLayout = "1.0.1"
+composeFoundation = "1.2.0-rc03"
+composeMaterial = "1.2.0-rc03"
+composeMaterial3 = "1.0.0-alpha14"
+composeRuntime = "1.2.0-rc03"
+composeUiTooling = "1.2.0-rc03"
+composeUiViewBinding = "1.2.0-rc03"
+detekt = "1.21.0"
+dokka = "1.7.0"
+gradleVersions = "0.42.0"
+junit = "5.8.2"
+kotlin = "1.7.0"
+materialDesign = "1.6.1"
+snappy = "0.0.1"
+
+[libraries]
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
+accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-camera = { module = "androidx.camera:camera-camera2", version.ref = "cameraX" }
+androidx-cameraLifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraX" }
+androidx-cameraPreview = { module = "androidx.camera:camera-view", version.ref = "cameraX" }
+androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
+androidx-compose-animation = { module = "androidx.compose.animation:animation", version.ref = "composeAnimation" }
+androidx-compose-constraint = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "composeConstraintLayout" }
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "composeFoundation" }
+androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "composeMaterial" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
+androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "composeRuntime" }
+androidx-compose-uiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "composeUiTooling" }
+androidx-compose-uiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "composeUiTooling" }
+androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.0.4" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+androidx-windows = { module = "androidx.window:window", version = "1.1.0-alpha02" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version = "1.2.1" }
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version = "1.0.0" }
+androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+google-materialDesign = { module = "com.google.android.material:material", version.ref = "materialDesign" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.6.4" }
+misc-detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+test-junitApi = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+test-junitEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradle" }
+android-library = { id = "com.android.library", version.ref = "androidGradle" }
+kotlin-android = { id = "kotlin-android", version.ref = "kotlin" }
+kotlin-androidGradle = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotlin-parcelize = { id = "kotlin-parcelize", version.ref = "kotlin" }
+misc-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+misc-gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersions" }
