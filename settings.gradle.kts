@@ -16,5 +16,4 @@ dependencyResolutionManagement {
 include(
   ":sample",
   ":snappy",
-  ":snappy-core"
 )
