@@ -10,7 +10,6 @@ plugins {
 android {
   resourcePrefix = "snappy"
   buildFeatures {
-    viewBinding = true
     buildConfig = false
     compose = true
   }
@@ -24,6 +23,7 @@ dependencies {
   implementation(libs.androidx.windows)
   implementation(libs.androidx.lifecycle.runtime)
   implementation(libs.androidx.lifecycle.viewmodel)
+  implementation(libs.google.materialDesign)
 
   implementation(libs.androidx.camera)
   implementation(libs.androidx.cameraLifecycle)

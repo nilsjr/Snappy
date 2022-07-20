@@ -9,20 +9,17 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.util.Log
-import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.Snackbar
 import de.nilsdruyen.snappy.Snappy
 import de.nilsdruyen.snappy.models.SnappyConfig
 import de.nilsdruyen.snappy.models.SnappyResult
-import de.nilsdruyen.snappysample.databinding.MainActivityBinding
 import de.nilsdruyen.snappysample.file.FileUtils
+import de.nilsdruyen.snappysample.ui.SnappySampleTheme
 
 class MainActivity : ComponentActivity() {
-
-  private lateinit var binding: MainActivityBinding
 
   private val snappy = registerForActivityResult(Snappy(), ::setResult)
   private val filePermissionResult =
@@ -45,14 +42,15 @@ class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    binding = MainActivityBinding.inflate(layoutInflater)
-    setContentView(binding.root)
-
-    binding.createPhotoButton.setOnClickListener {
-      if (checkPermission()) {
-        launchSnappy()
-      } else {
-        requestPermission()
+    setContent {
+      SnappySampleTheme {
+        Sample {
+          if (checkPermission()) {
+            launchSnappy()
+          } else {
+            requestPermission()
+          }
+        }
       }
     }
   }
@@ -98,25 +96,6 @@ class MainActivity : ComponentActivity() {
 
   private fun setResult(result: SnappyResult) {
     Log.i("MainActivity", result.toString())
-    showSnackbar(result)
-  }
-
-  private fun showSnackbar(result: SnappyResult) {
-//    PathUtils.getRealPath(this, result.image) ?: ""
-    val text = when (result) {
-      is SnappyResult.Success -> {
-        result.images.size.toString()
-      }
-      SnappyResult.Canceled -> "User canceled"
-      SnappyResult.PermissionDenied -> "Missing permission"
-      is SnappyResult.Error -> "${result.exception.javaClass.simpleName}: ${result.exception.localizedMessage}"
-    }
-
-    Snackbar.make(binding.root, text, Snackbar.LENGTH_INDEFINITE).apply {
-      view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)?.run {
-        maxLines = 5
-        setTextIsSelectable(true)
-      }
-    }.show()
+//    showSnackbar(result)
   }
 }
