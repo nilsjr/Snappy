@@ -18,6 +18,10 @@ formatting:
   ParameterListWrapping:
     indentSize: 2
 
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Composable']
+
 performance:
   SpreadOperator:
     active: false

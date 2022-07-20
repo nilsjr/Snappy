@@ -31,5 +31,15 @@ dependencies {
 
   implementation(libs.google.materialDesign)
 
+  implementation(libs.androidx.compose.activity)
   implementation(libs.androidx.compose.runtime)
+  implementation(libs.androidx.compose.foundation)
+  implementation(libs.androidx.compose.animation)
+  implementation(libs.androidx.compose.material.icons)
+  implementation(libs.androidx.compose.material3)
+
+  implementation(libs.androidx.compose.uiToolingPreview)
+  debugImplementation(libs.androidx.compose.uiTooling)
+
+  implementation(libs.coil.compose)
 }

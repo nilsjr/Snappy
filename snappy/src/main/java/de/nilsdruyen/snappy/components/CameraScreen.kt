@@ -32,7 +32,7 @@ internal fun CameraScreen(
           onError = onError,
         )
       }
-      is SnappyScreen.Gallery-> {
+      is SnappyScreen.Gallery -> {
         Gallery(viewModel, it.page)
       }
     }

@@ -18,10 +18,22 @@ internal class SnappyViewModel constructor(
 ) : ViewModel() {
 
   private val _state: MutableStateFlow<SnappyState> = MutableStateFlow(SnappyState())
-  val state: StateFlow<SnappyState> = _state.asStateFlow()
+  val state: StateFlow<SnappyState> by lazy {
+    loadImages()
+    _state.asStateFlow()
+  }
 
   fun setConfig(config: SnappyConfig) {
     _state.value = SnappyState(config)
+  }
+
+  private fun loadImages() {
+    viewModelScope.launch {
+      val images = fileController.getImages()
+      updateState {
+        copy(images = images)
+      }
+    }
   }
 
   fun addImage(image: SnappyImage) {
@@ -41,11 +53,21 @@ internal class SnappyViewModel constructor(
       }
     }
     updateState {
-      copy(
-        images = images.toMutableList().apply {
-          remove(image)
-        }
-      )
+      val images = images.toMutableList().apply {
+        remove(image)
+      }
+      if (images.isEmpty()) {
+        copy(
+          screen = SnappyScreen.Camera,
+          images = emptyList()
+        )
+      } else {
+        copy(
+          images = images.toMutableList().apply {
+            remove(image)
+          }
+        )
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-package de.nilsdruyen.snappysample.file
+package de.nilsdruyen.snappy.utils
 
 import android.content.ContentUris
 import android.content.Context
@@ -8,7 +8,7 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 
-object PathUtils {
+public object PathUtils {
 
   /**
    * Get a file path from a Uri. This will get the the path for Storage Access
@@ -19,52 +19,58 @@ object PathUtils {
    * @param uri     The Uri to query.
    * @author paulburke
    */
-  fun getRealPath(context: Context, uri: Uri): String? {
-    if (DocumentsContract.isDocumentUri(context, uri)) {
-      if (isExternalStorageDocument(uri)) {
-        val docId = DocumentsContract.getDocumentId(uri)
-        val split = docId.split(":").toTypedArray()
-        val type = split[0]
-        if ("primary".equals(type, ignoreCase = true)) {
-          return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
-        }
+  public fun getRealPath(context: Context, uri: Uri): String? {
+    return if (DocumentsContract.isDocumentUri(context, uri)) {
+      when {
+        isExternalStorageDocument(uri) -> {
+          val docId = DocumentsContract.getDocumentId(uri)
+          val split = docId.split(":").toTypedArray()
+          val type = split[0]
+          if ("primary".equals(type, ignoreCase = true)) {
+            Environment.getExternalStorageDirectory().toString() + "/" + split[1]
+          } else null
 
-        // TODO handle non-primary volumes
-      } else if (isDownloadsDocument(uri)) {
-        val id = DocumentsContract.getDocumentId(uri)
-        val contentUri: Uri = ContentUris.withAppendedId(
-          Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
-        )
-        return getDataColumn(context, contentUri, null, null)
-      } else if (isMediaDocument(uri)) {
-        val docId = DocumentsContract.getDocumentId(uri)
-        val split = docId.split(":").toTypedArray()
-        val type = split[0]
-        var contentUri: Uri? = null
-        when (type) {
-          "image" -> {
-            contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-          }
-          "video" -> {
-            contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-          }
-          "audio" -> {
-            contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-          }
+          // TODO handle non-primary volumes
         }
-        val selection = "_id=?"
-        val selectionArgs = arrayOf(
-          split[1]
-        )
-        return getDataColumn(context, contentUri, selection, selectionArgs)
+        isDownloadsDocument(uri) -> {
+          val id = DocumentsContract.getDocumentId(uri)
+          val contentUri: Uri = ContentUris.withAppendedId(
+            Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
+          )
+          getDataColumn(context, contentUri, null, null)
+        }
+        isMediaDocument(uri) -> {
+          val docId = DocumentsContract.getDocumentId(uri)
+          val split = docId.split(":").toTypedArray()
+          val type = split[0]
+          var contentUri: Uri? = null
+          when (type) {
+            "image" -> {
+              contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            }
+            "video" -> {
+              contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+            }
+            "audio" -> {
+              contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+            }
+          }
+          val selection = "_id=?"
+          val selectionArgs = arrayOf(
+            split[1]
+          )
+          getDataColumn(context, contentUri, selection, selectionArgs)
+        }
+        else -> null
       }
     } else if ("content".equals(uri.scheme, ignoreCase = true)) {
       // Return the remote address
-      return if (isGooglePhotosUri(uri)) uri.lastPathSegment else getDataColumn(context, uri, null, null)
+      if (isGooglePhotosUri(uri)) uri.lastPathSegment else getDataColumn(context, uri, null, null)
     } else if ("file".equals(uri.scheme, ignoreCase = true)) {
-      return uri.path
+      uri.path
+    } else {
+      null
     }
-    return null
   }
 
   /**

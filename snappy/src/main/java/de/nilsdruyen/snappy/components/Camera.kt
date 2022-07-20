@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.sharp.Lens
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -87,56 +86,37 @@ internal fun Camera(
       .navigationBarsPadding()
   ) {
     AndroidView({ previewView }, modifier = Modifier.fillMaxSize(), NoOpUpdate)
-
     Column(
       modifier = Modifier.align(Alignment.BottomCenter),
       verticalArrangement = Arrangement.Bottom
     ) {
-      CameraControls(
-        {
-          when (it) {
-            is CameraUiAction.OnCameraClick -> {
-              haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-              imageCapture.takePicture(context, state.config.outputDirectory, lensFacing, onImageCaptured, onError)
-            }
+      CameraControls {
+        when (it) {
+          is CameraUiAction.OnCameraClick -> {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            imageCapture.takePicture(context, state.config.outputDirectory, lensFacing, onImageCaptured, onError)
           }
         }
-      )
+      }
       ImageList(viewModel)
     }
-
-    IconButton(
-      onClick = { saveImages(state.images.map { it.uri }) },
-      modifier = Modifier
-        .padding(16.dp)
-        .background(Color.Black.copy(alpha = 0.3f), shape = CircleShape)
-        .align(Alignment.TopEnd)
-    ) {
-      Icon(
-        imageVector = Icons.Default.Check,
-        contentDescription = null,
-        tint = Color.White
-      )
+    SaveButton {
+      saveImages(state.images.map { it.uri })
     }
   }
 }
 
-
 @Composable
-internal fun CameraControls(cameraUIAction: (CameraUiAction) -> Unit, modifier: Modifier = Modifier) {
+internal fun CameraControls(
+  cameraUIAction: (CameraUiAction) -> Unit,
+) {
   Box(
-    modifier = modifier
+    modifier = Modifier
       .fillMaxWidth()
       .padding(16.dp),
 //    horizontalArrangement = Arrangement.SpaceBetween,
 //    verticalAlignment = Alignment.CenterVertically
   ) {
-//    CameraControl(
-//      Icons.Sharp.FlipCameraAndroid,
-//      R.string.snappy_flip_camera,
-//      modifier = Modifier.size(64.dp),
-//      onClick = { cameraUIAction(CameraUiAction.OnSwitchCameraClick) }
-//    )
     CameraControl(
       Icons.Sharp.Lens,
       R.string.snappy_take_image,
@@ -147,14 +127,6 @@ internal fun CameraControls(cameraUIAction: (CameraUiAction) -> Unit, modifier: 
         .border(1.dp, Color.White, CircleShape),
       onClick = { cameraUIAction(CameraUiAction.OnCameraClick) }
     )
-//    CameraControl(
-//      Icons.Sharp.PhotoLibrary,
-//      R.string.snappy_show_gallery,
-//      modifier = Modifier
-//        .size(64.dp)
-//        .align(Alignment.CenterEnd),
-//      onClick = { cameraUIAction(CameraUiAction.OnGalleryViewClick) }
-//    )
   }
 }
 

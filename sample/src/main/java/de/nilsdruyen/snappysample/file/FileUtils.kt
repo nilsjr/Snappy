@@ -5,7 +5,5 @@ import java.io.File
 
 object FileUtils {
 
-  fun getDirectory(): File {
-    return File(Environment.getExternalStorageDirectory(), "Snappy/")
-  }
+  fun getDirectory(): File = File(Environment.getExternalStorageDirectory(), "Snappy/")
 }

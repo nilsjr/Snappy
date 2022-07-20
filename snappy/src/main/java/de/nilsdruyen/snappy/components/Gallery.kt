@@ -70,7 +70,7 @@ private fun Gallery(images: List<SnappyImage>, page: Int, removeImage: (SnappyIm
       pagerState = pagerState,
       modifier = Modifier
         .align(Alignment.CenterHorizontally)
-        .padding(16.dp),
+        .padding(bottom = 16.dp, top = 8.dp),
       activeColor = Color.White,
     )
   }
@@ -97,8 +97,8 @@ private fun ImagePage(image: SnappyImage, removeImage: (SnappyImage) -> Unit) {
       },
       modifier = Modifier
         .align(Alignment.BottomCenter)
-        .background(Color.Black.copy(alpha = 0.4f), shape = CircleShape)
         .padding(bottom = 16.dp)
+        .background(Color.Black.copy(alpha = 0.4f), shape = CircleShape)
     ) {
       Icon(
         imageVector = Icons.Default.Delete,
