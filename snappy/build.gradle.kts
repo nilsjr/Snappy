@@ -3,7 +3,7 @@ plugins {
   id(libs.plugins.android.library.get().pluginId)
   id(libs.plugins.kotlin.android.get().pluginId)
   id(libs.plugins.kotlin.parcelize.get().pluginId)
-//  `maven-publish`
+  `maven-publish`
 //  signing
 }
 
@@ -15,6 +15,9 @@ android {
   }
   composeOptions {
     kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+  }
+  publishing {
+    singleVariant("release")
   }
 }
 
@@ -47,3 +50,54 @@ dependencies {
 
 group = "de.nilsdruyen.snappy"
 version = libs.versions.snappy.get()
+
+tasks.register<Jar>("androidSourcesJar") {
+  archiveClassifier.set("sources")
+  from(android.sourceSets.getByName("main").java.srcDirs, android.sourceSets.getByName("release").java.srcDirs)
+}
+
+afterEvaluate {
+  publishing {
+    publications {
+      create<MavenPublication>("release") {
+        from(components["release"])
+        artifactId = "snappy"
+//  artifact(tasks.named("androidJavadocJar"))
+        artifact(tasks.named("androidSourcesJar"))
+        pom {
+          name.set("snappy")
+          description.set("Android camera library for taking quick & easy snapshots called Snappy")
+          url.set("https://github.com/nilsjr/Snappy")
+          licenses {
+            license {
+              name.set("MIT License")
+              url.set("https://opensource.org/licenses/MIT")
+            }
+          }
+          developers {
+            developer {
+              id.set("nilsjr")
+              name.set("Nils Druyen")
+              email.set("info@nilsdruyen.de")
+            }
+          }
+          scm {
+            connection.set("https://github.com/nilsjr/Snappy.git")
+            developerConnection.set("https://github.com/nilsjr/Snappy.git")
+            url.set("https://github.com/nilsjr/Snappy")
+          }
+        }
+      }
+    }
+//    repositories {
+//      maven {
+//        name = "sonatype"
+//        url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+//        credentials {
+//          username = findStringProperty("sonatypeUsername")
+//          password = findStringProperty("sonatypePassword")
+//        }
+//      }
+//    }
+  }
+}
