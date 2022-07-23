@@ -27,8 +27,7 @@ launcher.launch(SnappyConfig(FileUtils.getDirectory()))
 ```
 </details>
 
-
-<details open>
+<details>
   <summary>Java</summary>
 
 ```java
