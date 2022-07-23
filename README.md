@@ -1,4 +1,4 @@
-Snappy is an android camerax library for taking snapshot fast & simple.
+**Snappy** is an android camerax library for taking snapshot fast & simple.
 
 - Activity Result API usage
 - Compose driven ui
@@ -10,6 +10,49 @@ Snappy is an android camerax library for taking snapshot fast & simple.
 ```kotlin
 implementation("de.nilsdruyen.snappy:snappy:0.0.1")
 ```
+
+<details open>
+  <summary>Kotlin</summary>
+
+```kotlin
+import de.nilsdruyen.snappy.Snappy
+import de.nilsdruyen.snappy.models.SnappyConfig
+import de.nilsdruyen.snappy.models.SnappyResult
+
+// setup snappy activity result launcher
+private val launcher = registerForActivityResult(Snappy(), ::setResult)
+
+// launch snappy activity
+launcher.launch(SnappyConfig(FileUtils.getDirectory()))
+```
+</details>
+
+
+<details open>
+  <summary>Java</summary>
+
+```java
+import de.nilsdruyen.snappy.Snappy;
+import de.nilsdruyen.snappy.models.SnappyConfig;
+import de.nilsdruyen.snappy.models.SnappyResult;
+
+class Activity {
+  
+  // setup snappy activity result launcher
+  private ActivityResultLauncher<SnappyConfig> snappy = registerForActivityResult(new Snappy(), (result) -> {
+    if (result instanceof SnappyResult.Success) {
+      List<Uri> images = ((SnappyResult.Success) result).component1();
+
+    }
+  });
+
+  // launch snappy activity
+  private void launch() {
+    snappy.launch(new SnappyConfig(new File("path"), true, true));
+  }
+}
+```
+</details>
 
 ### Requirements
 
