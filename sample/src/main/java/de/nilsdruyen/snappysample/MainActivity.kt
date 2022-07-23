@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
   }
 
   private fun launchSnappy() {
-    snappy.launch(SnappyConfig(FileUtils.getDirectory()))
+    snappy.launch(SnappyConfig(FileUtils.getDownloadDir()))
   }
 
   private fun checkPermission(): Boolean {

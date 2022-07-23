@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun BoxScope.SaveButton(onClick: () -> Unit){
+internal fun BoxScope.SaveButton(onClick: () -> Unit) {
   IconButton(
     onClick = onClick,
     modifier = Modifier

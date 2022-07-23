@@ -20,10 +20,23 @@ import de.nilsdruyen.snappy.models.SnappyConfig
 import de.nilsdruyen.snappy.models.SnappyResult
 
 // setup snappy activity result launcher
-private val launcher = registerForActivityResult(Snappy(), ::setResult)
+private val launcher = registerForActivityResult(Snappy()) { result ->
+  // do something
+}
 
-// launch snappy activity
-launcher.launch(SnappyConfig(FileUtils.getDirectory()))
+// or in compose
+val launcher = rememberLauncherForActivityResult(Snappy()) { result ->
+  when (result) {
+    is SnappyResult.Success -> {
+      // do something
+    }
+    else -> {
+      // 
+    }
+  }
+}
+
+launcher.launch(SnappyConfig(File("")))
 ```
 </details>
 
@@ -36,7 +49,7 @@ import de.nilsdruyen.snappy.models.SnappyConfig;
 import de.nilsdruyen.snappy.models.SnappyResult;
 
 class Activity {
-  
+
   // setup snappy activity result launcher
   private ActivityResultLauncher<SnappyConfig> snappy = registerForActivityResult(new Snappy(), (result) -> {
     if (result instanceof SnappyResult.Success) {
@@ -51,6 +64,7 @@ class Activity {
   }
 }
 ```
+
 </details>
 
 ### Requirements

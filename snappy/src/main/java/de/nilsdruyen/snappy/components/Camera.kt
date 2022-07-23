@@ -39,6 +39,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.viewinterop.NoOpUpdate
+import de.nilsdruyen.snappy.LocalSnappyConfig
 import de.nilsdruyen.snappy.R
 import de.nilsdruyen.snappy.SnappyViewModel
 import de.nilsdruyen.snappy.extensions.getCameraProvider
@@ -66,10 +67,15 @@ internal fun Camera(
   val preview = Preview.Builder().build()
   val previewView = remember { PreviewView(context) }
 
+  val config = LocalSnappyConfig.current
   val state by viewModel.state.collectAsState()
 
   val onImageCaptured: (Uri) -> Unit = { uri ->
-    viewModel.addImage(SnappyImage(uri))
+    if (config.once) {
+      saveImages(listOf(uri))
+    } else {
+      viewModel.addImage(SnappyImage(uri))
+    }
   }
 
   LaunchedEffect(lensFacing) {
@@ -93,15 +99,19 @@ internal fun Camera(
       CameraControls {
         when (it) {
           is CameraUiAction.OnCameraClick -> {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            imageCapture.takePicture(context, state.config.outputDirectory, lensFacing, onImageCaptured, onError)
+            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+            imageCapture.takePicture(context, config.outputDirectory, lensFacing, onImageCaptured, onError)
           }
         }
       }
-      ImageList(viewModel)
+      if (!config.once) {
+        ImageList(viewModel)
+      }
     }
-    SaveButton {
-      saveImages(state.images.map { it.uri })
+    if (!config.once) {
+      SaveButton {
+        saveImages(state.images.map { it.uri })
+      }
     }
   }
 }

@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.os.Environment
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.compositionLocalOf
 import de.nilsdruyen.snappy.Constants.EXTRA_CONFIG
 import de.nilsdruyen.snappy.Constants.EXTRA_IMAGES
 import de.nilsdruyen.snappy.Constants.EXTRA_RESULT_EXCEPTION
@@ -21,6 +24,9 @@ import de.nilsdruyen.snappy.models.ParcelableSnappyConfig
 import de.nilsdruyen.snappy.models.SnappyConfig
 import java.io.File
 
+internal val LocalSnappyConfig: ProvidableCompositionLocal<SnappyConfig> =
+  compositionLocalOf { error("No config provided") }
+
 internal class SnappyActivity : ComponentActivity() {
 
   private val viewModel: SnappyViewModel by viewModelBuilder {
@@ -33,23 +39,23 @@ internal class SnappyActivity : ComponentActivity() {
     val config = intent?.getParcelableExtra<ParcelableSnappyConfig>(EXTRA_CONFIG)?.toModel()
       ?: SnappyConfig(File(Environment.DIRECTORY_DCIM))
 
-    viewModel.setConfig(config)
-
     setContent {
       SnappyTheme {
-        CameraScreen(
-          viewModel = viewModel,
-          permissionDenied = {
-            setResult(RESULT_MISSING_PERMISSION, null)
-            finish()
-          },
-          saveImages = {
-            onSuccess(ArrayList(it))
-          },
-          onError = {
-            onFailure(it)
-          },
-        )
+        CompositionLocalProvider(LocalSnappyConfig provides config) {
+          CameraScreen(
+            viewModel = viewModel,
+            permissionDenied = {
+              setResult(RESULT_MISSING_PERMISSION, null)
+              finish()
+            },
+            saveImages = {
+              onSuccess(ArrayList(it))
+            },
+            onError = {
+              onFailure(it)
+            },
+          )
+        }
       }
     }
   }

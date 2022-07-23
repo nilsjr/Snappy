@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.nilsdruyen.snappy.components.SnappyScreen
 import de.nilsdruyen.snappy.controllers.FileController
-import de.nilsdruyen.snappy.models.SnappyConfig
 import de.nilsdruyen.snappy.models.SnappyImage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,10 +20,6 @@ internal class SnappyViewModel constructor(
   val state: StateFlow<SnappyState> by lazy {
     loadImages()
     _state.asStateFlow()
-  }
-
-  fun setConfig(config: SnappyConfig) {
-    _state.value = SnappyState(config)
   }
 
   private fun loadImages() {
