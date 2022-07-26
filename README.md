@@ -86,7 +86,23 @@ See [CONTRIBUTING](CONTRIBUTING.md)
 
 ## questions
 
+- Logo?!
 - translations?
+- renovate pr
+- contribution templates (issues, prs)
+- release management (changelogs, mavencentral)
+- tests
+- sonarcloud
+- Readme badge mavenCentral
+- Readme important file/storage permission has to be granted before
+- Roadmap? v2 with color theming? more options torch, switch cam?
+
+## features
+
+- delete images when canceled
+- config builder pattern
+- improve ui
+- cleanup code
 
 ## License
 
