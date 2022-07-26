@@ -1,6 +1,8 @@
 package de.nilsdruyen.snappy.components
 
 import android.net.Uri
+import android.view.Surface
+import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -32,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -45,6 +48,9 @@ import de.nilsdruyen.snappy.SnappyViewModel
 import de.nilsdruyen.snappy.extensions.getCameraProvider
 import de.nilsdruyen.snappy.extensions.takePicture
 import de.nilsdruyen.snappy.models.SnappyImage
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
 
 @Composable
 internal fun Camera(
@@ -56,15 +62,30 @@ internal fun Camera(
   val haptic = LocalHapticFeedback.current
   val lifecycleOwner = LocalLifecycleOwner.current
 
+  val configuration = LocalConfiguration.current
+  val screenAspectRatio = aspectRatio(configuration.screenWidthDp, configuration.screenHeightDp)
+
+  val rotation: Int = when (configuration.orientation) {
+    in 45..134 -> Surface.ROTATION_270
+    in 135..224 -> Surface.ROTATION_180
+    in 225..314 -> Surface.ROTATION_90
+    else -> Surface.ROTATION_0
+  }
+
   val lensFacing by remember { mutableStateOf(CameraSelector.LENS_FACING_BACK) }
   val imageCapture: ImageCapture = remember {
     ImageCapture.Builder()
       .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+      .setTargetAspectRatio(screenAspectRatio)
+      .setTargetRotation(rotation)
       .build()
   }
   val cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
 
-  val preview = Preview.Builder().build()
+  val preview = Preview.Builder()
+    .setTargetAspectRatio(screenAspectRatio)
+    .setTargetRotation(rotation)
+    .build()
   val previewView = remember { PreviewView(context) }
 
   val config = LocalSnappyConfig.current
@@ -114,6 +135,17 @@ internal fun Camera(
       }
     }
   }
+}
+
+private const val RATIO_4_3_VALUE = 4.0 / 3.0
+private const val RATIO_16_9_VALUE = 16.0 / 9.0
+
+private fun aspectRatio(width: Int, height: Int): Int {
+  val previewRatio = max(width, height).toDouble() / min(width, height)
+  if (abs(previewRatio - RATIO_4_3_VALUE) <= abs(previewRatio - RATIO_16_9_VALUE)) {
+    return AspectRatio.RATIO_4_3
+  }
+  return AspectRatio.RATIO_16_9
 }
 
 @Composable

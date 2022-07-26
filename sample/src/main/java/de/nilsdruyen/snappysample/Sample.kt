@@ -27,6 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -65,7 +66,7 @@ fun Options(onClick: () -> Unit, setImages: (List<Uri>) -> Unit, modifier: Modif
 
   val permissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission(), onResult = {
     if (it) {
-      launcher.launch(SnappyConfig(FileUtils.getDownloadDir(), once = true))
+      launcher.launch(SnappyConfig(FileUtils.getSnappyDirectory(), once = true))
     }
   })
 
@@ -139,6 +140,7 @@ fun Images(images: List<Uri>, modifier: Modifier = Modifier) {
             modifier = Modifier
               .fillMaxHeight()
               .aspectRatio(.8f)
+              .clip(RoundedCornerShape(8.dp))
               .border(1.dp, Color.LightGray, shape = RoundedCornerShape(8.dp))
           )
         }

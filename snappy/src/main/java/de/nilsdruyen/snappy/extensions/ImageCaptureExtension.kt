@@ -13,6 +13,7 @@ import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.core.net.toFile
+import androidx.core.net.toUri
 import de.nilsdruyen.snappy.Constants.TAG
 import de.nilsdruyen.snappy.utils.PathUtils
 import java.io.File
@@ -56,7 +57,7 @@ internal fun ImageCapture.takePicture(
           arrayOf(file.absolutePath),
           arrayOf(mimeType)
         ) { _, _ -> }
-        onImageCaptured(savedUri)
+        onImageCaptured(file.toUri())
       }
 
       override fun onError(exception: ImageCaptureException) {
@@ -75,21 +76,18 @@ private fun getOutputFileOptions(
     isReversedHorizontal = lensFacing == CameraSelector.LENS_FACING_FRONT
   }
 
-  val contentValues = ContentValues().apply {
-    put(MediaStore.MediaColumns.DISPLAY_NAME, photoFile.nameWithoutExtension)
-    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+  val builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+    val contentValues = ContentValues().apply {
+      put(MediaStore.MediaColumns.DISPLAY_NAME, photoFile.nameWithoutExtension)
+      put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
       put(MediaStore.MediaColumns.RELATIVE_PATH, "Snappy")
     }
+    ImageCapture.OutputFileOptions.Builder(contentResolver, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+  } else {
+    ImageCapture.OutputFileOptions.Builder(photoFile)
   }
 
-  return ImageCapture.OutputFileOptions
-    .Builder(contentResolver, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-    .setMetadata(metadata)
-    .build()
-//  return ImageCapture.OutputFileOptions.Builder(photoFile)
-//    .setMetadata(metadata)
-//    .build()
+  return builder.setMetadata(metadata).build()
 }
 
 private fun createFile(baseFolder: File, format: String, extension: String): File {
