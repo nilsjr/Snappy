@@ -8,11 +8,19 @@ compose driven.
 
 ## Download
 
-available on mavenCentral()
+Available on **mavenCentral()**
 
 ```kotlin
 implementation("de.nilsdruyen.snappy:snappy:0.0.1")
 ```
+
+## Requirements
+
+- AndroidX
+- MinSdk 21
+
+**⚠️Important: File/Storage permissions should be requested by your app. Only camera permissions are requested by
+Snappy**
 
 ## Usage
 
@@ -101,19 +109,11 @@ class Activity {
 
 </details>
 
-### Requirements
-
-- AndroidX
-- MinSdk 21
-
-**⚠️Important: File/Storage permissions should be requested by your app. Only camera permissions are requested by
-Snappy**
-
 ## Screenshots
 
 tbd.
 
-## contributing
+## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md)
 
