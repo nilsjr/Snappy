@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="345" height="120" src="https://raw.githubusercontent.com/G00fY2/quickie/gh-pages/media/logo.png">
+  <img width="100" height="100" src="https://raw.githubusercontent.com/nilsjr/snappy/gh-pages/images/ic_launcher_round.png">
 </p>
 
 **Snappy** is an android camerax library for taking snapshot fast & simple. Easy to integrate, 100% Kotlin & jetpack
