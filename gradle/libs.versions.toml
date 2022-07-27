@@ -6,20 +6,19 @@ androidconfig-compileSdk = "32"
 androidconfig-minSdk = "21"
 androidconfig-targetSdk = "32"
 androidxCore = "1.8.0"
-androidxLifecycle = "2.5.0"
+androidxLifecycle = "2.5.1"
 appcompat = "1.4.2"
 cameraX = "1.1.0"
 coil = "2.1.0"
-composeActivity = "1.5.0"
-composeAnimation = "1.2.0-rc03"
+composeActivity = "1.5.1"
+composeAnimation = "1.2.0"
 composeCompiler = "1.2.0"
 composeConstraintLayout = "1.0.1"
-composeFoundation = "1.2.0-rc03"
-composeMaterial = "1.2.0-rc03"
-composeMaterial3 = "1.0.0-alpha14"
-composeRuntime = "1.2.0-rc03"
-composeUiTooling = "1.2.0-rc03"
-composeUiViewBinding = "1.2.0-rc03"
+composeFoundation = "1.2.0"
+composeMaterial = "1.2.0"
+composeMaterial3 = "1.0.0-alpha15"
+composeRuntime = "1.2.0"
+composeUiTooling = "1.2.0"
 detekt = "1.21.0"
 dokka = "1.7.0"
 gradleVersions = "0.42.0"
@@ -47,7 +46,7 @@ androidx-compose-uiToolingPreview = { module = "androidx.compose.ui:ui-tooling-p
 androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.0.4" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
-androidx-windows = { module = "androidx.window:window", version = "1.1.0-alpha02" }
+androidx-windows = { module = "androidx.window:window", version = "1.1.0-alpha03" }
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version = "1.2.1" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version = "1.0.0" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }

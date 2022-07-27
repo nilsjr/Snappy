@@ -7,6 +7,7 @@ compose driven.
 
 - Activity Result API usage
 - Android Jetpack CameraX for displaying preview
+- Minimalistic ui design
 - Coil for image loading
 - Different modes (single image & multiple images)
 
