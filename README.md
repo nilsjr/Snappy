@@ -1,15 +1,22 @@
-**Snappy** is an android camerax library for taking snapshot fast & simple.
+**Snappy** is an android camerax library for taking snapshot fast & simple. Easy to integrate, 100% Kotlin & jetpack
+compose driven.
 
 - Activity Result API usage
-- Compose driven ui
 - Android Jetpack CameraX for displaying preview
 - Coil for image loading
+- Different modes (single image & multiple images)
 
-## Usage
+## Download
+
+available on mavenCentral()
 
 ```kotlin
 implementation("de.nilsdruyen.snappy:snappy:0.0.1")
 ```
+
+## Usage
+
+To use Snappy in our app you need to add following code snippets.
 
 <details open>
   <summary>Kotlin</summary>
@@ -38,7 +45,34 @@ val launcher = rememberLauncherForActivityResult(Snappy()) { result ->
 
 launcher.launch(SnappyConfig(File("")))
 ```
+
 </details>
+
+**SnappyConfig**
+
+```kotlin
+import de.nilsdruyen.snappy.models.SnappyConfig
+
+val config = SnappyConfig(
+  outputDirectory = File("path/"),    // no default
+  once = true,                        // default = false
+  withHapticFeedback = true,          // default = true
+)
+```
+
+**SnappyResult**
+
+```kotlin
+import de.nilsdruyen.snappy.models.SnappyResult
+
+public sealed interface SnappyResult {
+
+  public data class Success(val images: List<Uri>) : SnappyResult
+  public object Canceled : SnappyResult
+  public object PermissionDenied : SnappyResult
+  public data class Error(val exception: Exception) : SnappyResult
+}
+```
 
 <details>
   <summary>Java</summary>
@@ -72,9 +106,8 @@ class Activity {
 - AndroidX
 - MinSdk 21
 
-## Customization
-
-tbd.
+**⚠️Important: File/Storage permissions should be requested by your app. Only camera permissions are requested by
+Snappy**
 
 ## Screenshots
 
@@ -83,19 +116,6 @@ tbd.
 ## contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md)
-
-## questions
-
-- release management (changelogs, mavencentral)
-- Readme badge mavenCentral
-- Readme important file/storage permission has to be granted before
-- Roadmap? v2 with color theming? more options torch, switch cam?
-
-## features
-
-- delete images when canceled
-- config builder pattern
-- improve ui (flash, haptic feedback)
 
 ## License
 
