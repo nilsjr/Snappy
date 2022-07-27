@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="345" height="120" src="https://raw.githubusercontent.com/G00fY2/quickie/gh-pages/media/logo.png">
+</p>
+
 **Snappy** is an android camerax library for taking snapshot fast & simple. Easy to integrate, 100% Kotlin & jetpack
 compose driven.
 
@@ -6,9 +10,11 @@ compose driven.
 - Coil for image loading
 - Different modes (single image & multiple images)
 
-## Download
+## Download 
 
-Available on **mavenCentral()**
+Available on `mavenCentral()`
+
+[![Maven Central](https://img.shields.io/maven-central/v/de.nilsdruyen.snappy/snappy)](https://search.maven.org/search?q=g:de.nilsdruyen.snappy)
 
 ```kotlin
 implementation("de.nilsdruyen.snappy:snappy:0.0.1")
@@ -19,8 +25,13 @@ implementation("de.nilsdruyen.snappy:snappy:0.0.1")
 - AndroidX
 - MinSdk 21
 
-**⚠️Important: File/Storage permissions should be requested by your app. Only camera permissions are requested by
-Snappy**
+---
+
+<center><b>⚠️Important</b></center>
+
+**File/Storage permissions should be requested by your app. Only camera permissions are requested by Snappy**
+
+---
 
 ## Usage
 
@@ -111,7 +122,16 @@ class Activity {
 
 ## Screenshots
 
-tbd.
+Single snapshot mode
+
+| Single snapshot mode |
+| --- |
+| <img src="https://raw.githubusercontent.com/nilsjr/snappy/gh-pages/images/snappy_single.jpg" alt="drawing" width="200"/> |
+
+Multiple snapshot mode
+| No images | With images | Image gallery |
+| --- | --- | --- |
+| <img src="https://raw.githubusercontent.com/nilsjr/snappy/gh-pages/images/snappy_multi_no_image.jpg" alt="drawing" width="200"/> | <img src="https://raw.githubusercontent.com/nilsjr/snappy/gh-pages/images/snappy_multi_images.jpg" alt="drawing" width="200"/> | <img src="https://raw.githubusercontent.com/nilsjr/snappy/gh-pages/images/snappy_multi_gallery.jpg" alt="drawing" width="200"/> |
 
 ## Contributing
 
