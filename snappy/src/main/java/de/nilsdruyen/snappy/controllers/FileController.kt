@@ -7,4 +7,6 @@ internal interface FileController {
   suspend fun deleteImage(image: SnappyImage)
 
   suspend fun getImages(): List<SnappyImage>
+
+  suspend fun clearTempImages()
 }

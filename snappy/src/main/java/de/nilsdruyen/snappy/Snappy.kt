@@ -4,11 +4,7 @@ import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
-import android.content.RestrictionsManager.RESULT_ERROR
 import androidx.activity.result.contract.ActivityResultContract
-import de.nilsdruyen.snappy.Constants.EXTRA_CONFIG
-import de.nilsdruyen.snappy.Constants.EXTRA_MODE
-import de.nilsdruyen.snappy.Constants.RESULT_MISSING_PERMISSION
 import de.nilsdruyen.snappy.extensions.getRootException
 import de.nilsdruyen.snappy.extensions.toParcelable
 import de.nilsdruyen.snappy.extensions.toSnappyData

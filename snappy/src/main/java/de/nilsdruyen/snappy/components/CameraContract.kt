@@ -1,7 +1,7 @@
 package de.nilsdruyen.snappy.components
 
-internal sealed interface CameraUiAction {
-  object OnCameraClick : CameraUiAction
+internal sealed interface CameraEvent {
+  object TakePicture : CameraEvent
 }
 
 internal sealed interface SnappyScreen {

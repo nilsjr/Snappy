@@ -15,26 +15,19 @@ internal fun CameraScreen(
   saveImages: (List<Uri>) -> Unit,
   onError: (ImageCaptureException) -> Unit,
 ) {
-  val state by viewModel.state.collectAsState()
-
-  Crossfade(targetState = state.screen) {
+  val state by viewModel.screen.collectAsState()
+  Crossfade(targetState = state) {
     when (it) {
-      is SnappyScreen.Permissions -> {
-        CameraPermissions(
-          permissionGranted = viewModel::showCamera,
-          permissionDenied = permissionDenied,
-        )
-      }
-      is SnappyScreen.Camera -> {
-        Camera(
-          viewModel = viewModel,
-          saveImages = saveImages,
-          onError = onError,
-        )
-      }
-      is SnappyScreen.Gallery -> {
-        Gallery(viewModel, it.page)
-      }
+      is SnappyScreen.Permissions -> CameraPermissions(
+        permissionGranted = viewModel::showCamera,
+        permissionDenied = permissionDenied,
+      )
+      is SnappyScreen.Camera -> Camera(
+        viewModel = viewModel,
+        saveImages = saveImages,
+        onError = onError,
+      )
+      is SnappyScreen.Gallery -> Gallery(viewModel, it.page)
     }
   }
 }

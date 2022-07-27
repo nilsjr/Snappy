@@ -55,8 +55,14 @@ class MainActivity : ComponentActivity() {
     }
   }
 
+  override fun onResume() {
+    super.onResume()
+
+//    logDirectories()
+  }
+
   private fun launchSnappy() {
-    snappy.launch(SnappyConfig(FileUtils.getDownloadDir()))
+    snappy.launch(SnappyConfig(FileUtils.getSnappyDirectory()))
   }
 
   private fun checkPermission(): Boolean {
@@ -96,6 +102,5 @@ class MainActivity : ComponentActivity() {
 
   private fun setResult(result: SnappyResult) {
     Log.i("MainActivity", result.toString())
-//    showSnackbar(result)
   }
 }

@@ -16,6 +16,8 @@ internal class SnappyViewModel constructor(
   private val fileController: FileController
 ) : ViewModel() {
 
+  val screen = MutableStateFlow<SnappyScreen>(SnappyScreen.Permissions)
+
   private val _state: MutableStateFlow<SnappyState> = MutableStateFlow(SnappyState())
   val state: StateFlow<SnappyState> by lazy {
     loadImages()
@@ -52,10 +54,8 @@ internal class SnappyViewModel constructor(
         remove(image)
       }
       if (images.isEmpty()) {
-        copy(
-          screen = SnappyScreen.Camera,
-          images = emptyList()
-        )
+        screen.value = SnappyScreen.Camera
+        copy(images = emptyList())
       } else {
         copy(
           images = images.toMutableList().apply {
@@ -67,11 +67,11 @@ internal class SnappyViewModel constructor(
   }
 
   fun showCamera() {
-    _state.value = state.value.copy(screen = SnappyScreen.Camera)
+    screen.value = SnappyScreen.Camera
   }
 
   fun showGallery(page: Int) {
-    _state.value = state.value.copy(screen = SnappyScreen.Gallery(page))
+    screen.value = SnappyScreen.Gallery(page)
   }
 
   private fun updateState(setState: SnappyState.() -> SnappyState) {

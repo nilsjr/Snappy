@@ -52,6 +52,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
+@Suppress("LongMethod")
 @Composable
 internal fun Camera(
   viewModel: SnappyViewModel,
@@ -61,8 +62,9 @@ internal fun Camera(
   val context = LocalContext.current
   val haptic = LocalHapticFeedback.current
   val lifecycleOwner = LocalLifecycleOwner.current
-
+  val config = LocalSnappyConfig.current
   val configuration = LocalConfiguration.current
+
   val screenAspectRatio = aspectRatio(configuration.screenWidthDp, configuration.screenHeightDp)
 
   val rotation: Int = when (configuration.orientation) {
@@ -71,7 +73,6 @@ internal fun Camera(
     in 225..314 -> Surface.ROTATION_90
     else -> Surface.ROTATION_0
   }
-
   val lensFacing by remember { mutableStateOf(CameraSelector.LENS_FACING_BACK) }
   val imageCapture: ImageCapture = remember {
     ImageCapture.Builder()
@@ -88,7 +89,6 @@ internal fun Camera(
     .build()
   val previewView = remember { PreviewView(context) }
 
-  val config = LocalSnappyConfig.current
   val state by viewModel.state.collectAsState()
 
   val onImageCaptured: (Uri) -> Unit = { uri ->
@@ -119,7 +119,7 @@ internal fun Camera(
     ) {
       CameraControls {
         when (it) {
-          is CameraUiAction.OnCameraClick -> {
+          is CameraEvent.TakePicture -> {
             haptic.performHapticFeedback(HapticFeedbackType.LongPress)
             imageCapture.takePicture(context, config.outputDirectory, lensFacing, onImageCaptured, onError)
           }
@@ -150,24 +150,22 @@ private fun aspectRatio(width: Int, height: Int): Int {
 
 @Composable
 internal fun CameraControls(
-  cameraUIAction: (CameraUiAction) -> Unit,
+  cameraUIAction: (CameraEvent) -> Unit,
 ) {
   Box(
     modifier = Modifier
       .fillMaxWidth()
       .padding(16.dp),
-//    horizontalArrangement = Arrangement.SpaceBetween,
-//    verticalAlignment = Alignment.CenterVertically
   ) {
     CameraControl(
       Icons.Sharp.Lens,
       R.string.snappy_take_image,
       modifier = Modifier
         .align(Alignment.Center)
-        .size(64.dp)
+        .size(72.dp)
         .padding(1.dp)
         .border(1.dp, Color.White, CircleShape),
-      onClick = { cameraUIAction(CameraUiAction.OnCameraClick) }
+      onClick = { cameraUIAction(CameraEvent.TakePicture) }
     )
   }
 }

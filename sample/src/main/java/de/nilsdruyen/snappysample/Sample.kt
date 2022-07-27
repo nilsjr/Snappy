@@ -1,9 +1,8 @@
 package de.nilsdruyen.snappysample
 
-import android.Manifest
 import android.net.Uri
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,6 +36,8 @@ import de.nilsdruyen.snappy.models.SnappyConfig
 import de.nilsdruyen.snappy.models.SnappyResult
 import de.nilsdruyen.snappysample.file.FileUtils
 
+const val TAG = "SnappySample"
+
 @Composable
 fun Sample(onClick: () -> Unit) {
   val images = remember {
@@ -44,6 +45,7 @@ fun Sample(onClick: () -> Unit) {
   }
   Column(Modifier.fillMaxSize()) {
     Options(onClick, {
+      Log.i(TAG, "images taken: $it")
       images.value = it
     }, Modifier.weight(0.5f))
     Images(images.value, Modifier.weight(0.5f))
@@ -64,56 +66,50 @@ fun Options(onClick: () -> Unit, setImages: (List<Uri>) -> Unit, modifier: Modif
     }
   }
 
-  val permissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission(), onResult = {
-    if (it) {
-      launcher.launch(SnappyConfig(FileUtils.getSnappyDirectory(), once = true))
-    }
-  })
-
   Column(modifier, verticalArrangement = Arrangement.Center) {
-    Button(
-      onClick = { onClick() },
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(horizontal = 16.dp)
-    ) {
-      Text("Take multiple images")
+    SnappyButton(text = "Take multiple images") {
+      onClick()
     }
     Spacer(modifier = Modifier.height(16.dp))
-    Button(
-      onClick = {
-        permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-//        launcher.launch(
-//          SnappyConfig(
-//            outputDirectory = FileUtils.getDownloadDir(),
-//            once = true,
-//            withHapticFeedback = true
-//          )
-//        )
-      },
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(horizontal = 16.dp)
-    ) {
-      Text("Take single image")
-    }
-    Spacer(modifier = Modifier.height(16.dp))
-    Button(
-      onClick = {
-        launcher.launch(
-          SnappyConfig(
-            outputDirectory = FileUtils.getDownloadDir(),
-            once = true,
-            withHapticFeedback = true
-          )
+    SnappyButton(text = "Take single image") {
+      launcher.launch(
+        SnappyConfig(
+          outputDirectory = FileUtils.getSnappyDirectory(),
+          once = true,
         )
-      },
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(horizontal = 16.dp)
-    ) {
-      Text("Take images (custom)")
+      )
     }
+    Spacer(modifier = Modifier.height(16.dp))
+    SnappyButton(text = "Take single image custom") {
+      launcher.launch(
+        SnappyConfig(
+          outputDirectory = FileUtils.getSnappyDirectory("/Custom"),
+          once = true,
+        )
+      )
+    }
+    Spacer(modifier = Modifier.height(16.dp))
+    SnappyButton(text = "Take images (custom)") {
+      launcher.launch(
+        SnappyConfig(
+          outputDirectory = FileUtils.getSnappyDirectory("/Custom"),
+          once = false,
+          withHapticFeedback = false
+        )
+      )
+    }
+  }
+}
+
+@Composable
+fun SnappyButton(text: String, onClick: () -> Unit) {
+  Button(
+    onClick = onClick,
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(horizontal = 16.dp)
+  ) {
+    Text(text = text)
   }
 }
 

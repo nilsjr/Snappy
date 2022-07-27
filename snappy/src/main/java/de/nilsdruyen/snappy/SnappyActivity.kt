@@ -10,11 +10,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
-import de.nilsdruyen.snappy.Constants.EXTRA_CONFIG
-import de.nilsdruyen.snappy.Constants.EXTRA_IMAGES
-import de.nilsdruyen.snappy.Constants.EXTRA_RESULT_EXCEPTION
-import de.nilsdruyen.snappy.Constants.RESULT_ERROR
-import de.nilsdruyen.snappy.Constants.RESULT_MISSING_PERMISSION
 import de.nilsdruyen.snappy.components.CameraScreen
 import de.nilsdruyen.snappy.components.ui.SnappyTheme
 import de.nilsdruyen.snappy.controllers.FileControllerImpl
@@ -29,15 +24,17 @@ internal val LocalSnappyConfig: ProvidableCompositionLocal<SnappyConfig> =
 
 internal class SnappyActivity : ComponentActivity() {
 
+  private val config by lazy {
+    intent?.getParcelableExtra<ParcelableSnappyConfig>(EXTRA_CONFIG)?.toModel()
+      ?: SnappyConfig(File(Environment.DIRECTORY_DCIM))
+  }
+
   private val viewModel: SnappyViewModel by viewModelBuilder {
-    SnappyViewModel(FileControllerImpl(contentResolver))
+    SnappyViewModel(FileControllerImpl(config.outputDirectory, contentResolver))
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
-    val config = intent?.getParcelableExtra<ParcelableSnappyConfig>(EXTRA_CONFIG)?.toModel()
-      ?: SnappyConfig(File(Environment.DIRECTORY_DCIM))
 
     setContent {
       SnappyTheme {
@@ -48,12 +45,8 @@ internal class SnappyActivity : ComponentActivity() {
               setResult(RESULT_MISSING_PERMISSION, null)
               finish()
             },
-            saveImages = {
-              onSuccess(ArrayList(it))
-            },
-            onError = {
-              onFailure(it)
-            },
+            saveImages = { onSuccess(ArrayList(it)) },
+            onError = this::onFailure,
           )
         }
       }
