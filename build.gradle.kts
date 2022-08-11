@@ -39,7 +39,6 @@ subprojects {
     afterEvaluate {
         extensions.configure<BaseExtension> {
             compileSdkVersion(libs.versions.androidconfig.compileSdk.get().toInt())
-            buildToolsVersion(libs.versions.androidconfig.buildTools.get())
             defaultConfig {
                 minSdk = libs.versions.androidconfig.minSdk.get().toInt()
                 targetSdk = libs.versions.androidconfig.targetSdk.get().toInt()

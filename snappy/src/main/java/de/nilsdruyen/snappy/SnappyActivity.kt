@@ -3,6 +3,7 @@ package de.nilsdruyen.snappy
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import androidx.activity.ComponentActivity
@@ -24,9 +25,13 @@ internal val LocalSnappyConfig: ProvidableCompositionLocal<SnappyConfig> =
 
 internal class SnappyActivity : ComponentActivity() {
 
+  @Suppress("DEPRECATION")
   private val config by lazy {
-    intent?.getParcelableExtra<ParcelableSnappyConfig>(EXTRA_CONFIG)?.toModel()
-      ?: SnappyConfig(File(Environment.DIRECTORY_DCIM))
+    if (Build.VERSION.SDK_INT >= 33) {
+      intent?.getParcelableExtra(EXTRA_CONFIG, ParcelableSnappyConfig::class.java)
+    } else {
+      intent?.getParcelableExtra(EXTRA_CONFIG)
+    }?.toModel() ?: SnappyConfig(File(Environment.DIRECTORY_DCIM))
   }
 
   private val viewModel: SnappyViewModel by viewModelBuilder {
