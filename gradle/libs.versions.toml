@@ -44,7 +44,7 @@ androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", versio
 androidx-compose-uiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "composeUiTooling" }
 androidx-compose-uiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "composeUiTooling" }
 androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
-androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.0.4" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.1.4" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 androidx-windows = { module = "androidx.window:window", version = "1.1.0-alpha03" }
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version = "1.2.1" }
