@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+  namespace = "de.nilsdruyen.snappysample"
   defaultConfig {
     applicationId = "de.nilsdruyen.snappysample"
     versionCode = 1

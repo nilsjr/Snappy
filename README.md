@@ -85,12 +85,12 @@ val config = SnappyConfig(
 ```kotlin
 import de.nilsdruyen.snappy.models.SnappyResult
 
-public sealed interface SnappyResult {
+sealed interface SnappyResult {
 
-  public data class Success(val images: List<Uri>) : SnappyResult
-  public object Canceled : SnappyResult
-  public object PermissionDenied : SnappyResult
-  public data class Error(val exception: Exception) : SnappyResult
+  data class Success(val images: List<Uri>) : SnappyResult
+  object Canceled : SnappyResult
+  object PermissionDenied : SnappyResult
+  data class Error(val exception: Exception) : SnappyResult
 }
 ```
 
@@ -125,8 +125,8 @@ class Activity {
 
 Single snapshot mode
 
-| Single snapshot mode |
-| --- |
+| Single snapshot mode                                                                                                     |
+|--------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/nilsjr/snappy/gh-pages/images/snappy_single.jpg" alt="drawing" width="200"/> |
 
 Multiple snapshot mode

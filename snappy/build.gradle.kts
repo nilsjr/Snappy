@@ -1,5 +1,3 @@
-import kotlin.math.sign
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   id(libs.plugins.android.library.get().pluginId)
@@ -11,6 +9,7 @@ plugins {
 }
 
 android {
+  namespace = "de.nilsdruyen.snappy"
   resourcePrefix = "snappy"
   buildFeatures {
     buildConfig = false
