@@ -23,7 +23,7 @@ dokka = "1.7.10"
 gradleVersions = "0.42.0"
 junit = "5.8.2"
 kotlin = "1.7.20"
-materialDesign = "1.6.1"
+materialDesign = "1.7.0"
 snappy = "0.0.1"
 
 [libraries]
