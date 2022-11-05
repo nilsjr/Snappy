@@ -1,6 +1,5 @@
 package de.nilsdruyen.snappy.components
 
-import android.net.Uri
 import androidx.camera.core.ImageCaptureException
 import androidx.compose.animation.Crossfade
 import androidx.compose.runtime.Composable
@@ -12,7 +11,7 @@ import de.nilsdruyen.snappy.SnappyViewModel
 internal fun CameraScreen(
   viewModel: SnappyViewModel,
   permissionDenied: () -> Unit,
-  saveImages: (List<Uri>) -> Unit,
+  saveImages: (List<String>) -> Unit,
   onError: (ImageCaptureException) -> Unit,
 ) {
   val state by viewModel.screen.collectAsState()

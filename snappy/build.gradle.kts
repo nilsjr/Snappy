@@ -21,6 +21,9 @@ android {
   publishing {
     singleVariant("release")
   }
+  testOptions {
+    unitTests.isReturnDefaultValues = true
+  }
 }
 
 dependencies {
@@ -48,6 +51,12 @@ dependencies {
 
   implementation(libs.accompanist.pager)
   implementation(libs.accompanist.pager.indicators)
+
+  testImplementation(libs.test.junitApi)
+  testRuntimeOnly(libs.test.junitEngine)
+  testImplementation(libs.kotlinx.coroutines.test)
+  testImplementation(libs.turbine)
+  testImplementation(libs.assertJ)
 }
 
 group = "de.nilsdruyen.snappy"

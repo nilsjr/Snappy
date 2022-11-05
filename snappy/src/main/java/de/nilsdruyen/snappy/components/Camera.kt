@@ -56,7 +56,7 @@ import kotlin.math.min
 @Composable
 internal fun Camera(
   viewModel: SnappyViewModel,
-  saveImages: (List<Uri>) -> Unit,
+  saveImages: (List<String>) -> Unit,
   onError: (ImageCaptureException) -> Unit
 ) {
   val context = LocalContext.current
@@ -93,9 +93,9 @@ internal fun Camera(
 
   val onImageCaptured: (Uri) -> Unit = { uri ->
     if (config.once) {
-      saveImages(listOf(uri))
+      saveImages(listOf(uri.toString()))
     } else {
-      viewModel.addImage(SnappyImage(uri))
+      viewModel.addImage(SnappyImage(uri.toString()))
     }
   }
 
@@ -131,7 +131,7 @@ internal fun Camera(
     }
     if (!config.once) {
       SaveButton {
-        saveImages(state.images.map { it.uri })
+        saveImages(state.images.map { it.path })
       }
     }
   }

@@ -2,7 +2,6 @@ package de.nilsdruyen.snappy
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -58,11 +57,11 @@ internal class SnappyActivity : ComponentActivity() {
     }
   }
 
-  private fun onSuccess(result: ArrayList<Uri>) {
+  private fun onSuccess(result: ArrayList<String>) {
     setResult(
       Activity.RESULT_OK,
       Intent().apply {
-        putParcelableArrayListExtra(EXTRA_IMAGES, result)
+        putStringArrayListExtra(EXTRA_IMAGES, result)
       }
     )
     finish()

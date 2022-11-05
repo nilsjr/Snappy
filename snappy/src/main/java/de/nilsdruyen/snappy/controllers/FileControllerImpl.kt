@@ -15,7 +15,7 @@ import java.io.File
 
 internal class FileControllerImpl(
   private val outputDirectory: File,
-  private val contentResolver: ContentResolver
+  private val contentResolver: ContentResolver,
 ) : FileController {
 
   private val relativePath by lazy {
@@ -25,12 +25,14 @@ internal class FileControllerImpl(
   }
 
   override suspend fun deleteImage(image: SnappyImage) {
-    Log.i(TAG, "delete: ${image.uri}")
-    try {
-      image.uri.toFile().delete()
-    } catch (exception: IllegalArgumentException) {
-      Log.w(TAG, exception.message ?: "error delete image: IllegalArgumentException")
-      contentResolver.delete(image.uri, null, null)
+    withContext(Dispatchers.IO) {
+      Log.i(TAG, "delete: ${image.uri}")
+      try {
+        image.uri?.toFile()?.delete()
+      } catch (exception: IllegalArgumentException) {
+        Log.w(TAG, exception.message ?: "error delete image: IllegalArgumentException")
+        image.uri?.let { contentResolver.delete(it, null, null) }
+      }
     }
   }
 
@@ -60,7 +62,7 @@ internal class FileControllerImpl(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             id,
           )
-          images.add(SnappyImage(contentUri))
+          images.add(SnappyImage(contentUri.toString()))
         }
       }
 
