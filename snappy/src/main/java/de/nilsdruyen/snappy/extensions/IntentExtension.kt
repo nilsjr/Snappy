@@ -19,7 +19,8 @@ internal fun Intent?.getRootException(): Exception {
   }
 }
 
+@Suppress("DEPRECATION")
 private inline fun <reified T> Intent.parcelableList(key: String, clazz: Class<T>): List<T>? = when {
   SDK_INT >= 33 -> getParcelableArrayListExtra(key, clazz)
-  else -> @Suppress("DEPRECATION") getParcelableArrayListExtra(key)
+  else -> getParcelableArrayListExtra(key)
 }

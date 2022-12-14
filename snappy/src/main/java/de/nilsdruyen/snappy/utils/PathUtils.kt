@@ -28,14 +28,17 @@ public object PathUtils {
           val type = split[0]
           if ("primary".equals(type, ignoreCase = true)) {
             Environment.getExternalStorageDirectory().toString() + "/" + split[1]
-          } else null
+          } else {
+            null
+          }
 
           // TODO handle non-primary volumes
         }
         isDownloadsDocument(uri) -> {
           val id = DocumentsContract.getDocumentId(uri)
           val contentUri: Uri = ContentUris.withAppendedId(
-            Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
+            Uri.parse("content://downloads/public_downloads"),
+            java.lang.Long.valueOf(id)
           )
           getDataColumn(context, contentUri, null, null)
         }
