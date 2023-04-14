@@ -1,5 +1,5 @@
 [versions]
-accompanist = "0.28.0"
+accompanist = "0.30.1"
 androidGradle = "7.4.2"
 androidconfig-compileSdk = "33"
 androidconfig-minSdk = "21"
