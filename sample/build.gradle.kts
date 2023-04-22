@@ -20,6 +20,7 @@ android {
   }
   buildFeatures {
     compose = true
+    buildConfig = true
   }
   composeOptions {
     kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
@@ -31,6 +32,7 @@ dependencies {
 
   implementation(libs.google.materialDesign)
 
+  implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.compose.activity)
   implementation(libs.androidx.compose.runtime)
   implementation(libs.androidx.compose.foundation)

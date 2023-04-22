@@ -37,6 +37,7 @@ dependencies {
   implementation(libs.androidx.cameraLifecycle)
   implementation(libs.androidx.cameraPreview)
 
+  implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.compose.activity)
   implementation(libs.androidx.compose.runtime)
   implementation(libs.androidx.compose.foundation)
@@ -49,7 +50,6 @@ dependencies {
 
   implementation(libs.coil.compose)
 
-  implementation(libs.accompanist.pager)
   implementation(libs.accompanist.pager.indicators)
 
   testImplementation(libs.test.junitApi)

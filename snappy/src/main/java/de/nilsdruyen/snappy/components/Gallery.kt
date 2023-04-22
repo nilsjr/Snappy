@@ -1,6 +1,7 @@
 package de.nilsdruyen.snappy.components
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -26,10 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.rememberPagerState
 import de.nilsdruyen.snappy.SnappyViewModel
 import de.nilsdruyen.snappy.models.SnappyImage
 
@@ -44,7 +44,7 @@ internal fun Gallery(viewModel: SnappyViewModel, page: Int) {
   Gallery(images = state.images, page, viewModel::removeImage)
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Gallery(images: List<SnappyImage>, page: Int, removeImage: (SnappyImage) -> Unit) {
   val pagerState = rememberPagerState()
@@ -56,18 +56,19 @@ private fun Gallery(images: List<SnappyImage>, page: Int, removeImage: (SnappyIm
       .background(Color.Black)
   ) {
     HorizontalPager(
-      count = images.size,
+      pageCount = images.size,
       state = pagerState,
       modifier = Modifier
         .weight(1f)
         .fillMaxWidth(),
       contentPadding = PaddingValues(24.dp),
-      itemSpacing = 8.dp
+      pageSpacing = 8.dp
     ) { page ->
       ImagePage(image = images[page], removeImage)
     }
     HorizontalPagerIndicator(
       pagerState = pagerState,
+      pageCount = images.size,
       modifier = Modifier
         .align(Alignment.CenterHorizontally)
         .padding(bottom = 16.dp, top = 8.dp),
