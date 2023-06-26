@@ -21,7 +21,7 @@ kotlin = "1.8.21"
 kotlinxCoroutines = "1.6.4"
 materialDesign = "1.9.0"
 snappy = "0.0.1"
-turbine = "0.12.3"
+turbine = "1.0.0"
 
 [libraries]
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
