@@ -16,7 +16,7 @@ subprojects {
   apply(plugin = rootProject.libs.plugins.misc.detekt.get().pluginId)
   extensions.configure<DetektExtension> {
     toolVersion = rootProject.libs.versions.detekt.get()
-    config = files("$rootDir/detekt.yml")
+    config.setFrom(files("$rootDir/detekt.yml"))
     buildUponDefaultConfig = true
     ignoredBuildTypes = listOf("release")
   }
@@ -54,6 +54,29 @@ subprojects {
       }
     }
   }
+
+  tasks.register<Detekt>("ktlintFormat") {
+    description = "Run detekt ktlint wrapper"
+    parallel = true
+    setSource(files("src/main/kotlin"))
+    config.setFrom(files("$rootDir/detekt.yml"))
+    buildUponDefaultConfig = true
+    disableDefaultRuleSets = true
+    autoCorrect = true
+    reports {
+      xml {
+        required.set(true)
+        outputLocation.set(layout.buildDirectory.file("reports/detekt/detektFormatting.xml"))
+      }
+      html.required.set(false)
+      txt.required.set(false)
+    }
+    include(listOf("**/*.kt", "**/*.kts"))
+    exclude("build/")
+    dependencies {
+      "detektPlugins"(libs.misc.detektFormatting)
+    }
+  }
 }
 
 tasks.dependencyUpdates.configure {
@@ -69,5 +92,5 @@ tasks.dependencyUpdates.configure {
 }
 
 tasks.register<Delete>("clean") {
-  delete(buildDir)
+  delete(layout.buildDirectory)
 }

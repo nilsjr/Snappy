@@ -47,7 +47,7 @@ internal fun Gallery(viewModel: SnappyViewModel, page: Int) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Gallery(images: List<SnappyImage>, page: Int, removeImage: (SnappyImage) -> Unit) {
-  val pagerState = rememberPagerState()
+  val pagerState = rememberPagerState { images.size }
 
   Column(
     Modifier
@@ -56,7 +56,6 @@ private fun Gallery(images: List<SnappyImage>, page: Int, removeImage: (SnappyIm
       .background(Color.Black)
   ) {
     HorizontalPager(
-      pageCount = images.size,
       state = pagerState,
       modifier = Modifier
         .weight(1f)
