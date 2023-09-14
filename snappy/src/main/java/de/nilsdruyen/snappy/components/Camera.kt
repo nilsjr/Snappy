@@ -110,11 +110,16 @@ internal fun Camera(
     modifier = Modifier
       .fillMaxSize()
       .background(Color.Black)
-      .navigationBarsPadding()
   ) {
-    AndroidView({ previewView }, modifier = Modifier.fillMaxSize(), NoOpUpdate)
+    AndroidView(
+      factory = { previewView },
+      modifier = Modifier.fillMaxSize(),
+      update = NoOpUpdate
+    )
     Column(
-      modifier = Modifier.align(Alignment.BottomCenter),
+      modifier = Modifier
+        .align(Alignment.BottomCenter)
+        .navigationBarsPadding(),
       verticalArrangement = Arrangement.Bottom
     ) {
       CameraControls {
@@ -130,7 +135,11 @@ internal fun Camera(
       }
     }
     if (!config.once) {
-      SaveButton {
+      SaveButton(
+        modifier = Modifier
+        .padding(end = 16.dp, top = 32.dp)
+        .align(Alignment.TopEnd)
+      ) {
         saveImages(state.images.map { it.path })
       }
     }

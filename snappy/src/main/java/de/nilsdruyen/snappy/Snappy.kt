@@ -13,16 +13,19 @@ import de.nilsdruyen.snappy.models.SnappyResult
 
 public class Snappy : ActivityResultContract<SnappyConfig, SnappyResult>() {
 
+  private lateinit var packageName: String
+
   override fun createIntent(context: Context, input: SnappyConfig): Intent {
+    packageName = context.packageName
     return Intent(context, SnappyActivity::class.java).apply {
       putExtra(EXTRA_MODE, SnappyMode.DEFAULT)
-      putExtra(EXTRA_CONFIG, input.toParcelable())
+      putExtra(EXTRA_CONFIG, input.copy(packageName = context.packageName).toParcelable())
     }
   }
 
   override fun parseResult(resultCode: Int, intent: Intent?): SnappyResult {
     return when (resultCode) {
-      RESULT_OK -> SnappyResult.Success(intent.toSnappyData())
+      RESULT_OK -> SnappyResult.Success(intent.toSnappyData(packageName))
       RESULT_CANCELED -> SnappyResult.Canceled
       RESULT_MISSING_PERMISSION -> SnappyResult.Canceled
       RESULT_ERROR -> SnappyResult.Error(intent.getRootException())

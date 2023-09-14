@@ -29,9 +29,13 @@ internal class FileControllerImpl(
       Log.i(TAG, "delete: ${image.uri}")
       try {
         image.uri?.toFile()?.delete()
+        Log.i(TAG, "delete successful")
       } catch (exception: IllegalArgumentException) {
         Log.w(TAG, exception.message ?: "error delete image: IllegalArgumentException")
-        image.uri?.let { contentResolver.delete(it, null, null) }
+        image.uri?.let {
+          val result = contentResolver.delete(it, null, null)
+          if (result > 0) Log.i(TAG, "delete successful")
+        }
       }
     }
   }

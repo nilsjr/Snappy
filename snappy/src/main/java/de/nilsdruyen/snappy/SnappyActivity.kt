@@ -58,10 +58,11 @@ internal class SnappyActivity : ComponentActivity() {
   }
 
   private fun onSuccess(result: ArrayList<String>) {
+    val name = "${config.packageName}.$EXTRA_IMAGES"
     setResult(
       Activity.RESULT_OK,
       Intent().apply {
-        putStringArrayListExtra(EXTRA_IMAGES, result)
+        putStringArrayListExtra(name, result)
       }
     )
     finish()

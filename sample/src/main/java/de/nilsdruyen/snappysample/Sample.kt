@@ -20,6 +20,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import de.nilsdruyen.snappy.Snappy
@@ -40,9 +42,7 @@ const val TAG = "SnappySample"
 
 @Composable
 fun Sample(onClick: () -> Unit) {
-  val images = remember {
-    mutableStateOf(emptyList<Uri>())
-  }
+  val images = remember { mutableStateOf(emptyList<Uri>()) }
   Column(Modifier.fillMaxSize()) {
     Options(onClick, {
       Log.i(TAG, "images taken: $it")
@@ -54,6 +54,7 @@ fun Sample(onClick: () -> Unit) {
 
 @Composable
 fun Options(onClick: () -> Unit, setImages: (List<Uri>) -> Unit, modifier: Modifier = Modifier) {
+  val packageName = LocalContext.current.packageName
   val launcher = rememberLauncherForActivityResult(Snappy()) { result ->
     when (result) {
       is SnappyResult.Success -> {
@@ -76,6 +77,7 @@ fun Options(onClick: () -> Unit, setImages: (List<Uri>) -> Unit, modifier: Modif
         SnappyConfig(
           outputDirectory = FileUtils.getSnappyDirectory(),
           once = true,
+          packageName = packageName,
         )
       )
     }
@@ -85,6 +87,7 @@ fun Options(onClick: () -> Unit, setImages: (List<Uri>) -> Unit, modifier: Modif
         SnappyConfig(
           outputDirectory = FileUtils.getSnappyDirectory("/Custom"),
           once = true,
+          packageName = packageName,
         )
       )
     }
@@ -94,7 +97,8 @@ fun Options(onClick: () -> Unit, setImages: (List<Uri>) -> Unit, modifier: Modif
         SnappyConfig(
           outputDirectory = FileUtils.getSnappyDirectory("/Custom"),
           once = false,
-          withHapticFeedback = false
+          withHapticFeedback = false,
+          packageName = packageName,
         )
       )
     }
@@ -109,7 +113,7 @@ fun SnappyButton(text: String, onClick: () -> Unit) {
       .fillMaxWidth()
       .padding(horizontal = 16.dp)
   ) {
-    Text(text = text)
+    Text(text = text, color = MaterialTheme.colorScheme.onPrimary)
   }
 }
 
@@ -121,7 +125,8 @@ fun Images(images: List<Uri>, modifier: Modifier = Modifier) {
         text = "no images provided",
         modifier = Modifier
           .wrapContentSize()
-          .align(Alignment.Center)
+          .align(Alignment.Center),
+        color = MaterialTheme.colorScheme.onSurface,
       )
     } else {
       LazyRow(

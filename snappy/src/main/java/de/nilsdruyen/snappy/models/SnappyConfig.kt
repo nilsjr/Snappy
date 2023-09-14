@@ -6,4 +6,5 @@ public data class SnappyConfig(
   val outputDirectory: File,
   val once: Boolean = false,
   val withHapticFeedback: Boolean = true,
+  val packageName: String = "",
 )
