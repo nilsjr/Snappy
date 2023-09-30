@@ -1,6 +1,6 @@
 [versions]
 accompanist = "0.32.0"
-androidGradle = "8.1.1"
+androidGradle = "8.1.2"
 androidconfig-compileSdk = "34"
 androidconfig-minSdk = "21"
 androidconfig-targetSdk = "34"
