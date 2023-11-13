@@ -7,17 +7,17 @@ androidconfig-targetSdk = "34"
 androidxCore = "1.12.0"
 androidxLifecycle = "2.6.2"
 appcompat = "1.6.1"
-cameraX = "1.2.3"
+cameraX = "1.3.0"
 coil = "2.5.0"
 composeActivity = "1.8.0"
 composeBom = "2023.10.01"
-composeCompiler = "1.5.3"
+composeCompiler = "1.5.4"
 composeConstraintLayout = "1.0.1"
 detekt = "1.23.3"
 dokka = "1.9.10"
 gradleVersions = "0.49.0"
-junit = "5.10.0"
-kotlin = "1.9.10"
+junit = "5.10.1"
+kotlin = "1.9.20"
 kotlinxCoroutines = "1.7.3"
 materialDesign = "1.10.0"
 snappy = "0.0.1"
@@ -27,8 +27,8 @@ turbine = "1.0.0"
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-camera = { module = "androidx.camera:camera-camera2", version.ref = "cameraX" }
-androidx-cameraLifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraX" }
-androidx-cameraPreview = { module = "androidx.camera:camera-view", version.ref = "cameraX" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraX" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraX" }
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
 androidx-compose-animation = { module = "androidx.compose.animation:animation" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
@@ -47,7 +47,7 @@ androidx-windows = { module = "androidx.window:window", version = "1.1.0" }
 assertJ = "org.assertj:assertj-core:3.24.2"
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
-google-materialDesign = { module = "com.google.android.material:material", version.ref = "materialDesign" }
+google-material = { module = "com.google.android.material:material", version.ref = "materialDesign" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 misc-detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }

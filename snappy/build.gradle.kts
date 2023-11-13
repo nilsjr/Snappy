@@ -31,11 +31,11 @@ dependencies {
   implementation(libs.androidx.windows)
   implementation(libs.androidx.lifecycle.runtime)
   implementation(libs.androidx.lifecycle.viewmodel)
-  implementation(libs.google.materialDesign)
+  implementation(libs.google.material)
 
   implementation(libs.androidx.camera)
-  implementation(libs.androidx.cameraLifecycle)
-  implementation(libs.androidx.cameraPreview)
+  implementation(libs.androidx.camera.lifecycle)
+  implementation(libs.androidx.camera.view)
 
   implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.compose.activity)

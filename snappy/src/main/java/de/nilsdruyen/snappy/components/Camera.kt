@@ -2,11 +2,12 @@ package de.nilsdruyen.snappy.components
 
 import android.net.Uri
 import android.view.Surface
-import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
+import androidx.camera.core.resolutionselector.ResolutionSelector
+import androidx.camera.core.resolutionselector.ResolutionStrategy
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,7 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,9 +49,6 @@ import de.nilsdruyen.snappy.SnappyViewModel
 import de.nilsdruyen.snappy.extensions.getCameraProvider
 import de.nilsdruyen.snappy.extensions.takePicture
 import de.nilsdruyen.snappy.models.SnappyImage
-import kotlin.math.abs
-import kotlin.math.max
-import kotlin.math.min
 
 @Suppress("LongMethod")
 @Composable
@@ -65,7 +63,7 @@ internal fun Camera(
   val config = LocalSnappyConfig.current
   val configuration = LocalConfiguration.current
 
-  val screenAspectRatio = aspectRatio(configuration.screenWidthDp, configuration.screenHeightDp)
+  val screenSize = android.util.Size(configuration.screenWidthDp, configuration.screenHeightDp)
 
   val rotation: Int = when (configuration.orientation) {
     in 45..134 -> Surface.ROTATION_270
@@ -73,18 +71,36 @@ internal fun Camera(
     in 225..314 -> Surface.ROTATION_90
     else -> Surface.ROTATION_0
   }
-  val lensFacing by remember { mutableStateOf(CameraSelector.LENS_FACING_BACK) }
+  val lensFacing by remember { mutableIntStateOf(CameraSelector.LENS_FACING_BACK) }
   val imageCapture: ImageCapture = remember {
     ImageCapture.Builder()
       .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-      .setTargetAspectRatio(screenAspectRatio)
+      .setResolutionSelector(
+        ResolutionSelector.Builder()
+          .setResolutionStrategy(ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY)
+          .setResolutionFilter { supportedSizes, _ ->
+            supportedSizes.filter {
+              it.width <= screenSize.width && it.height <= screenSize.height
+            }
+          }
+          .build()
+      )
       .setTargetRotation(rotation)
       .build()
   }
   val cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
 
   val preview = Preview.Builder()
-    .setTargetAspectRatio(screenAspectRatio)
+    .setResolutionSelector(
+      ResolutionSelector.Builder()
+        .setResolutionStrategy(ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY)
+        .setResolutionFilter { supportedSizes, _ ->
+          supportedSizes.filter {
+            it.width <= screenSize.width && it.height <= screenSize.height
+          }
+        }
+        .build()
+    )
     .setTargetRotation(rotation)
     .build()
   val previewView = remember { PreviewView(context) }
@@ -135,17 +151,6 @@ internal fun Camera(
       }
     }
   }
-}
-
-private const val RATIO_4_3_VALUE = 4.0 / 3.0
-private const val RATIO_16_9_VALUE = 16.0 / 9.0
-
-private fun aspectRatio(width: Int, height: Int): Int {
-  val previewRatio = max(width, height).toDouble() / min(width, height)
-  if (abs(previewRatio - RATIO_4_3_VALUE) <= abs(previewRatio - RATIO_16_9_VALUE)) {
-    return AspectRatio.RATIO_4_3
-  }
-  return AspectRatio.RATIO_16_9
 }
 
 @Composable

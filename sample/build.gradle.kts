@@ -30,7 +30,7 @@ android {
 dependencies {
   implementation(project(":snappy"))
 
-  implementation(libs.google.materialDesign)
+  implementation(libs.google.material)
 
   implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.compose.activity)
