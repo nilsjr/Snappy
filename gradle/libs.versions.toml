@@ -19,7 +19,7 @@ gradleVersions = "0.50.0"
 junit = "5.10.1"
 kotlin = "1.9.20"
 kotlinxCoroutines = "1.7.3"
-materialDesign = "1.10.0"
+materialDesign = "1.11.0"
 snappy = "0.0.1"
 turbine = "1.0.0"
 
