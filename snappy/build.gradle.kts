@@ -50,8 +50,6 @@ dependencies {
 
   implementation(libs.coil.compose)
 
-  implementation(libs.accompanist.pager.indicators)
-
   testImplementation(libs.test.junitApi)
   testRuntimeOnly(libs.test.junitEngine)
   testImplementation(libs.kotlinx.coroutines.test)

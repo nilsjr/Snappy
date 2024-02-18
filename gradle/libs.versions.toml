@@ -1,5 +1,4 @@
 [versions]
-accompanist = "0.34.0"
 androidGradle = "8.2.2"
 androidconfig-compileSdk = "34"
 androidconfig-minSdk = "21"
@@ -25,7 +24,6 @@ snappy = "0.0.1"
 turbine = "1.0.0"
 
 [libraries]
-accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-camera = { module = "androidx.camera:camera-camera2", version.ref = "cameraX" }
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraX" }
