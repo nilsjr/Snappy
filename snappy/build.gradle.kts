@@ -31,7 +31,6 @@ dependencies {
   implementation(libs.androidx.windows)
   implementation(libs.androidx.lifecycle.runtime)
   implementation(libs.androidx.lifecycle.viewmodel)
-  implementation(libs.google.material)
 
   implementation(libs.androidx.camera)
   implementation(libs.androidx.camera.lifecycle)
