@@ -1,9 +1,9 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-  id(libs.plugins.android.library.get().pluginId)
-  id(libs.plugins.kotlin.android.get().pluginId)
-  id(libs.plugins.kotlin.parcelize.get().pluginId)
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.kotlin.dokka)
+  alias(libs.plugins.kotlin.parcelize)
   `maven-publish`
   signing
 }
@@ -14,9 +14,6 @@ android {
   buildFeatures {
     buildConfig = false
     compose = true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
   }
   publishing {
     singleVariant("release")
