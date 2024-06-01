@@ -1,9 +1,10 @@
 complexity:
-  ComplexMethod:
+  CyclomaticComplexMethod:
     ignoreSingleWhenExpression: true
   LongParameterList:
     ignoreAnnotated: ['Parcelize']
     constructorThreshold: 8
+    functionThreshold: 11
 
 exceptions:
   TooGenericExceptionCaught:

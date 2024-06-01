@@ -1,11 +1,9 @@
 package de.nilsdruyen.snappy
 
-import androidx.activity.ComponentActivity
-
 internal const val TAG = "SnappyLog"
 
-internal const val RESULT_MISSING_PERMISSION = ComponentActivity.RESULT_FIRST_USER + 1
-internal const val RESULT_ERROR = ComponentActivity.RESULT_FIRST_USER + 2
+internal const val RESULT_MISSING_PERMISSION = 21
+internal const val RESULT_ERROR = 20
 
 internal const val EXTRA_MODE = "snappy-mode"
 internal const val EXTRA_CONFIG = "snappy-config"

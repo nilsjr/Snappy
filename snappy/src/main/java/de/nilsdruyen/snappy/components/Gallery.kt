@@ -29,7 +29,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.google.accompanist.pager.HorizontalPagerIndicator
 import de.nilsdruyen.snappy.SnappyViewModel
 import de.nilsdruyen.snappy.models.SnappyImage
 

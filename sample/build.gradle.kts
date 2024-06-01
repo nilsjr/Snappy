@@ -1,7 +1,7 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-  id(libs.plugins.android.application.get().pluginId)
-  id(libs.plugins.kotlin.android.get().pluginId)
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -22,15 +22,10 @@ android {
     compose = true
     buildConfig = true
   }
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
-  }
 }
 
 dependencies {
   implementation(project(":snappy"))
-
-  implementation(libs.google.materialDesign)
 
   implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.compose.activity)

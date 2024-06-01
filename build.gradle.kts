@@ -1,13 +1,17 @@
 import com.android.build.gradle.BaseExtension
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.ir.backend.js.export.strictModeReservedWords
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   alias(libs.plugins.android.application) apply false
-  alias(libs.plugins.kotlin.androidGradle) apply false
+  alias(libs.plugins.android.library) apply false
+  alias(libs.plugins.kotlin.android) apply false
+  alias(libs.plugins.kotlin.compose) apply false
   alias(libs.plugins.kotlin.dokka) apply false
+  alias(libs.plugins.kotlin.parcelize) apply false
   alias(libs.plugins.misc.detekt) apply false
   alias(libs.plugins.misc.gradleVersions)
 }
@@ -24,20 +28,22 @@ subprojects {
     add("detektPlugins", rootProject.libs.misc.detektFormatting)
   }
   tasks.withType<Detekt>().configureEach {
-    jvmTarget = "11"
+    jvmTarget = "17"
   }
   tasks.withType<Test> {
     useJUnitPlatform()
     failFast = true
   }
   tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-      jvmTarget = JavaVersion.VERSION_11.toString()
-      allWarningsAsErrors = true
-      freeCompilerArgs = freeCompilerArgs + listOfNotNull(
-        "-progressive",
-        "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-        "-Xexplicit-api=strict".takeIf { (this@subprojects.name != "sample") },
+    compilerOptions {
+      jvmTarget.set(JvmTarget.JVM_17)
+      allWarningsAsErrors.set(true)
+      progressiveMode.set(true)
+      freeCompilerArgs.addAll(
+        listOfNotNull(
+          "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+          "-Xexplicit-api=strict".takeIf { (this@subprojects.name != "sample") },
+        )
       )
     }
   }
@@ -49,8 +55,8 @@ subprojects {
         targetSdk = libs.versions.androidconfig.targetSdk.get().toInt()
       }
       compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
       }
     }
   }

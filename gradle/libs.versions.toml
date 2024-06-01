@@ -1,34 +1,31 @@
 [versions]
-accompanist = "0.32.0"
-androidGradle = "8.1.2"
+androidGradle = "8.4.1"
 androidconfig-compileSdk = "34"
 androidconfig-minSdk = "21"
 androidconfig-targetSdk = "34"
-androidxCore = "1.12.0"
-androidxLifecycle = "2.6.2"
-appcompat = "1.6.1"
-cameraX = "1.2.3"
-coil = "2.4.0"
-composeActivity = "1.7.2"
-composeBom = "2023.10.00"
-composeCompiler = "1.5.3"
+androidxCore = "1.13.1"
+androidxLifecycle = "2.8.1"
+androidxWindow = "1.3.0"
+appcompat = "1.7.0"
+cameraX = "1.3.3"
+coil = "2.6.0"
+composeActivity = "1.9.0"
+composeBom = "2024.05.00"
 composeConstraintLayout = "1.0.1"
-detekt = "1.23.1"
-dokka = "1.9.0"
-gradleVersions = "0.48.0"
-junit = "5.10.0"
-kotlin = "1.9.10"
-kotlinxCoroutines = "1.7.3"
-materialDesign = "1.9.0"
+detekt = "1.23.6"
+dokka = "1.9.20"
+gradleVersions = "0.51.0"
+junit = "5.10.2"
+kotlin = "2.0.0"
+kotlinxCoroutines = "1.8.1"
 snappy = "0.0.1"
-turbine = "1.0.0"
+turbine = "1.1.0"
 
 [libraries]
-accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-camera = { module = "androidx.camera:camera-camera2", version.ref = "cameraX" }
-androidx-cameraLifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraX" }
-androidx-cameraPreview = { module = "androidx.camera:camera-view", version.ref = "cameraX" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraX" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraX" }
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
 androidx-compose-animation = { module = "androidx.compose.animation:animation" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
@@ -43,11 +40,10 @@ androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
-androidx-windows = { module = "androidx.window:window", version = "1.1.0" }
-assertJ = "org.assertj:assertj-core:3.24.2"
+androidx-windows = { module = "androidx.window:window", version.ref = "androidxWindow" }
+assertJ = "org.assertj:assertj-core:3.26.0"
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
-google-materialDesign = { module = "com.google.android.material:material", version.ref = "materialDesign" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 misc-detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
@@ -58,9 +54,9 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradle" }
 android-library = { id = "com.android.library", version.ref = "androidGradle" }
-kotlin-android = { id = "kotlin-android", version.ref = "kotlin" }
-kotlin-androidGradle = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-kotlin-parcelize = { id = "kotlin-parcelize", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 misc-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 misc-gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersions" }
