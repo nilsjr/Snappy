@@ -38,11 +38,11 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.viewinterop.NoOpUpdate
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import de.nilsdruyen.snappy.LocalSnappyConfig
 import de.nilsdruyen.snappy.R
 import de.nilsdruyen.snappy.SnappyViewModel
