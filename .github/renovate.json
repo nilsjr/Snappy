@@ -8,5 +8,22 @@
   ],
   "schedule": [
     "before 5am every saturday"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": [
+        "^org.jetbrains.kotlin",
+        "^com.google.devtools.ksp"
+      ],
+      "groupName": "kotlin"
+    },
+    {
+      "description": "Automerge non-major updates",
+      "matchUpdateTypes": [
+        "patch",
+        "minor"
+      ],
+      "automerge": true
+    }
   ]
 }
