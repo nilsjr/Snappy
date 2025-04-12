@@ -17,7 +17,7 @@ dokka = "2.0.0"
 gradleVersions = "0.52.0"
 junit = "5.12.2"
 kotlin = "2.1.20"
-kotlinxCoroutines = "1.10.1"
+kotlinxCoroutines = "1.10.2"
 snappy = "0.0.1"
 turbine = "1.2.0"
 
