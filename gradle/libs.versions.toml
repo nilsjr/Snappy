@@ -1,5 +1,5 @@
 [versions]
-androidGradle = "9.0.0"
+androidGradle = "9.1.0"
 androidconfig-compileSdk = "36"
 androidconfig-minSdk = "23"
 androidconfig-targetSdk = "36"
@@ -7,14 +7,15 @@ androidxCore = "1.18.0"
 androidxLifecycle = "2.10.0"
 androidxWindow = "1.5.1"
 appcompat = "1.7.1"
-cameraX = "1.5.3"
+cameraX = "1.6.0"
 coil = "2.7.0"
 composeActivity = "1.13.0"
-composeBom = "2026.03.00"
+composeBom = "2026.03.01"
 composeConstraintLayout = "1.1.1"
 detekt = "1.23.8"
-dokka = "2.1.0"
-gradleVersions = "0.52.0"
+dokka = "2.2.0"
+gradleVersions = "0.53.0"
+guava = "33.5.0-android"
 junit = "6.0.3"
 kotlin = "2.3.20"
 kotlinxCoroutines = "1.10.2"
@@ -23,7 +24,8 @@ turbine = "1.2.1"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
-androidx-camera = { module = "androidx.camera:camera-camera2", version.ref = "cameraX" }
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraX" }
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraX" }
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraX" }
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraX" }
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
@@ -44,6 +46,7 @@ androidx-windows = { module = "androidx.window:window", version.ref = "androidxW
 assertJ = "org.assertj:assertj-core:3.27.7"
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 misc-detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
@@ -54,7 +57,7 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradle" }
 android-library = { id = "com.android.library", version.ref = "androidGradle" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+#kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }

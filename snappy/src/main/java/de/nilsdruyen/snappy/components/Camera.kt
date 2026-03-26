@@ -119,7 +119,7 @@ internal fun Camera(
     val cameraProvider = context.getCameraProvider()
     cameraProvider.unbindAll()
     cameraProvider.bindToLifecycle(lifecycleOwner, cameraSelector, preview, imageCapture)
-    preview.setSurfaceProvider(previewView.surfaceProvider)
+    preview.surfaceProvider = previewView.surfaceProvider
   }
 
   Box(

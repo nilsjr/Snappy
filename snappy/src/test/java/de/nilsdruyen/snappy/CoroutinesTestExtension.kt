@@ -28,15 +28,15 @@ internal class CoroutinesTestExtension(
 
   val testScope = TestScope(testDispatcher)
 
-  override fun beforeAll(context: ExtensionContext?) {
+  override fun beforeAll(context: ExtensionContext) {
     Dispatchers.setMain(testDispatcher)
   }
 
-  override fun afterAll(context: ExtensionContext?) {
+  override fun afterAll(context: ExtensionContext) {
     Dispatchers.resetMain()
   }
 
-  override fun postProcessTestInstance(testInstance: Any?, context: ExtensionContext?) {
+  override fun postProcessTestInstance(testInstance: Any, context: ExtensionContext) {
     (testInstance as? CoroutineTest)?.let { coroutineTest ->
       coroutineTest.testScope = testScope
       coroutineTest.dispatcher = testDispatcher

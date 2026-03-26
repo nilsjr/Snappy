@@ -1,6 +1,6 @@
 plugins {
   alias(libs.plugins.android.library)
-  alias(libs.plugins.kotlin.android)
+//  alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.kotlin.dokka)
   alias(libs.plugins.kotlin.parcelize)
@@ -29,9 +29,12 @@ dependencies {
   implementation(libs.androidx.lifecycle.runtime)
   implementation(libs.androidx.lifecycle.viewmodel)
 
-  implementation(libs.androidx.camera)
+  implementation(libs.androidx.camera.core)
+  implementation(libs.androidx.camera.camera2)
   implementation(libs.androidx.camera.lifecycle)
   implementation(libs.androidx.camera.view)
+
+  implementation(libs.guava)
 
   implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.compose.activity)
