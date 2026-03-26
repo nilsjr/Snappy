@@ -3,20 +3,20 @@ androidGradle = "9.0.0"
 androidconfig-compileSdk = "36"
 androidconfig-minSdk = "23"
 androidconfig-targetSdk = "36"
-androidxCore = "1.17.0"
+androidxCore = "1.18.0"
 androidxLifecycle = "2.10.0"
 androidxWindow = "1.5.1"
 appcompat = "1.7.1"
-cameraX = "1.5.2"
+cameraX = "1.5.3"
 coil = "2.7.0"
-composeActivity = "1.12.2"
-composeBom = "2026.01.00"
+composeActivity = "1.13.0"
+composeBom = "2026.03.00"
 composeConstraintLayout = "1.1.1"
 detekt = "1.23.8"
 dokka = "2.1.0"
 gradleVersions = "0.52.0"
-junit = "6.0.2"
-kotlin = "2.3.0"
+junit = "6.0.3"
+kotlin = "2.3.20"
 kotlinxCoroutines = "1.10.2"
 snappy = "0.0.1"
 turbine = "1.2.1"
@@ -41,7 +41,7 @@ androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
 androidx-windows = { module = "androidx.window:window", version.ref = "androidxWindow" }
-assertJ = "org.assertj:assertj-core:3.27.6"
+assertJ = "org.assertj:assertj-core:3.27.7"
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
