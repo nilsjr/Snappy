@@ -1,5 +1,5 @@
 [versions]
-androidGradle = "9.1.0"
+androidGradle = "9.1.1"
 androidconfig-compileSdk = "36"
 androidconfig-minSdk = "23"
 androidconfig-targetSdk = "36"
