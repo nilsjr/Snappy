@@ -9,7 +9,15 @@ plugins {
 
 android {
   namespace = "de.nilsdruyen.snappy"
+  compileSdk = libs.versions.androidconfig.compileSdk.get().toInt()
   resourcePrefix = "snappy"
+  defaultConfig {
+    minSdk = libs.versions.androidconfig.minSdk.get().toInt()
+  }
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
   buildFeatures {
     buildConfig = false
     compose = true

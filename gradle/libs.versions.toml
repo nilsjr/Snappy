@@ -14,7 +14,7 @@ composeBom = "2026.03.01"
 composeConstraintLayout = "1.1.1"
 detekt = "1.23.8"
 dokka = "2.2.0"
-gradleVersions = "0.53.0"
+gradleVersions = "0.52.0"
 guava = "33.6.0-jre"
 junit = "6.0.3"
 kotlin = "2.3.20"
@@ -57,7 +57,6 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradle" }
 android-library = { id = "com.android.library", version.ref = "androidGradle" }
-#kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }

@@ -1,15 +1,21 @@
 plugins {
   alias(libs.plugins.android.application)
-//  alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
 }
 
 android {
   namespace = "de.nilsdruyen.snappysample"
+  compileSdk = libs.versions.androidconfig.compileSdk.get().toInt()
   defaultConfig {
     applicationId = "de.nilsdruyen.snappysample"
+    minSdk = libs.versions.androidconfig.minSdk.get().toInt()
+    targetSdk = libs.versions.androidconfig.targetSdk.get().toInt()
     versionCode = 1
     versionName = "1.0"
+  }
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
   buildTypes {
     getByName("release") {

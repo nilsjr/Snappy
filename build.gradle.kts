@@ -1,4 +1,3 @@
-import com.android.build.gradle.BaseExtension
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -45,19 +44,7 @@ subprojects {
       )
     }
   }
-  afterEvaluate {
-    extensions.configure<BaseExtension> {
-      compileSdkVersion(libs.versions.androidconfig.compileSdk.get().toInt())
-      defaultConfig {
-        minSdk = libs.versions.androidconfig.minSdk.get().toInt()
-        targetSdk = libs.versions.androidconfig.targetSdk.get().toInt()
-      }
-      compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-      }
-    }
-  }
+
 
   tasks.register<Detekt>("ktlintFormat") {
     description = "Run detekt ktlint wrapper"
