@@ -23,7 +23,9 @@ android {
     compose = true
   }
   publishing {
-    singleVariant("release")
+    singleVariant("release") {
+      withSourcesJar()
+    }
   }
   testOptions {
     unitTests.isReturnDefaultValues = true
@@ -72,11 +74,6 @@ version = libs.versions.snappy.get()
 //  dependsOn("dokkaJavadoc")
 //}
 
-tasks.register<Jar>("androidSourcesJar") {
-  archiveClassifier.set("sources")
-  from(android.sourceSets.getByName("main").java.srcDirs, android.sourceSets.getByName("release").java.srcDirs)
-}
-
 afterEvaluate {
   publishing {
     publications {
@@ -84,7 +81,6 @@ afterEvaluate {
         from(components["release"])
         artifactId = "snappy"
 //        artifact(tasks.named("androidJavadocJar"))
-        artifact(tasks.named("androidSourcesJar"))
         pom {
           name.set("snappy")
           description.set("Android camera library for taking quick & easy snapshots called Snappy")
