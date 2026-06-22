@@ -24,7 +24,7 @@ implementation("de.nilsdruyen.snappy:snappy:0.0.1")
 ## Requirements
 
 - AndroidX
-- MinSdk 21
+- MinSdk 23
 
 ---
 
