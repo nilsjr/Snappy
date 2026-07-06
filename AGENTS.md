@@ -17,7 +17,7 @@ This file provides guidance to AI coding agents (Claude Code, and others) when w
 - **Static analysis:** Detekt (+ `detekt-formatting`)
 - **Docs:** Dokka
 - **Testing:** JUnit 5 (Jupiter), AssertJ, Turbine, kotlinx-coroutines-test
-- **SDK:** minSdk **23**, compile/target SDK **36** (defined in `libs.versions.toml`; the README's "MinSdk 21" is stale)
+- **SDK:** minSdk **23**, compileSdk **37**, targetSdk **36** (defined in `libs.versions.toml`; the README's "MinSdk 21" is stale)
 
 ## Commands
 
