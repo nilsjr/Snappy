@@ -1,9 +1,9 @@
 [versions]
 androidGradle = "9.2.1"
-androidconfig-compileSdk = "36"
+androidconfig-compileSdk = "37"
 androidconfig-minSdk = "23"
 androidconfig-targetSdk = "36"
-androidxCore = "1.18.0"
+androidxCore = "1.19.0"
 androidxLifecycle = "2.10.0"
 androidxWindow = "1.5.1"
 appcompat = "1.7.1"
