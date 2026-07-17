@@ -6,6 +6,8 @@ reviews:
 
   auto_review:
     enabled: true
+    # keep it quiet: on new pushes, only re-review the added commits
+    auto_incremental_review: true
     ignore_usernames:
       - "renovate[bot]"
       - "dependabot[bot]"
@@ -15,15 +17,15 @@ reviews:
       - "main"
       # add "release/.*" or "hotfix/.*" here if you want reviews on those merges too
 
-  # keep it quiet on trivial changes
-  auto_incremental_review: true
   request_changes_workflow: false  # never blocks merge, just comments
 
   path_filters:
     - "!**/*.lock"
+    - "!**/package-lock.json"
+    - "!**/pnpm-lock.yaml"
     - "!**/dist/**"
     - "!**/*.md"
 
-# optional: enforce Conventional Commits awareness in the summary
+# let CodeRabbit answer follow-up questions in PR comments automatically
 chat:
   auto_reply: true
