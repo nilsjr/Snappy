@@ -1,0 +1,29 @@
+# .coderabbit.yaml
+# CodeRabbit config — solo dev, GitFlow, low-noise reviews
+
+reviews:
+  profile: chill  # relaxed tone, fewer nitpicks — good for "unimportant" projects
+
+  auto_review:
+    enabled: true
+    ignore_usernames:
+      - "renovate[bot]"
+      - "dependabot[bot]"
+      - "github-actions[bot]"
+    base_branches:
+      - "develop"
+      - "main"
+      # add "release/.*" or "hotfix/.*" here if you want reviews on those merges too
+
+  # keep it quiet on trivial changes
+  auto_incremental_review: true
+  request_changes_workflow: false  # never blocks merge, just comments
+
+  path_filters:
+    - "!**/*.lock"
+    - "!**/dist/**"
+    - "!**/*.md"
+
+# optional: enforce Conventional Commits awareness in the summary
+chat:
+  auto_reply: true
